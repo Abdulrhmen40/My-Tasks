@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>قائمة مهامي — احترافية</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <div class="header">
+        <div class="brand">
+          <div class="logo">ق</div>
+          <div>
+            <h1>قائمتي — مهامك احترافية</h1>
+            <div class="subtitle small">
+              .أضف، حرّر، رتب، صدر واستورد — كل شيء محفوظ تلقائياً
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="btn ghost" id="importBtn" title="استيراد ملف JSON">
+            <span class="icon">📥</span> استيراد
+          </button>
+          <button class="btn ghost" id="exportBtn" title="تصدير JSON">
+            <span class="icon">📤</span> تصدير
+          </button>
+          <button class="btn ghost" id="clearCompletedBtn" title="حذف المكتملة">
+            <span class="icon">🧹</span> مسح المكتملة
+          </button>
+          <button class="btn ghost" id="clearAllBtn" title="حذف الكل">
+            <span class="icon">🗑</span> مسح الكل
+          </button>
+          <button class="btn" id="themeToggle" title="تبديل الثيم">
+            <span class="icon">🌗</span> ثيم
+          </button>
+        </div>
+      </div>
+
+      <!-- main -->
+      <section class="panel">
+        <div class="add-area">
+          <input
+            id="taskInput"
+            class="task-input"
+            placeholder="أضف مهمة جديدة واضغط Enter..."
+          />
+          <button id="addBtn" class="btn primary">➕ إضافة</button>
+          <div style="width: 8px"></div>
+        </div>
+
+        <div
+          style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap"
+        >
+          <div class="search" style="flex: 1">
+            <input id="searchInput" placeholder="ابحث داخل المهام..." />
+          </div>
+
+          <div style="display: flex; gap: 8px; align-items: center">
+            <button class="btn ghost" id="sortBtn" title="فرز حسب التاريخ">
+              ترتيب:
+              <span id="sortMode" style="margin-inline-start: 6px"
+                >جديد → قديم</span
+              >
+            </button>
+            <div class="pill muted" id="counter">0 مهام — 0 متبقي</div>
+          </div>
+        </div>
+
+        <div id="tasksContainer" class="list" aria-live="polite"></div>
+
+        <div id="emptyState" class="empty" style="display: none">
+          لا توجد مهام — أضف أول مهمة الآن ✨
+        </div>
+
+        <footer class="small muted">
+          يمكنك سحب المهام لإعادة ترتيبها. اضغط مرتين لتعديل النص.
+        </footer>
+      </section>
+
+      <!-- sidebar -->
+      <aside class="sidebar">
+        <div class="stats">
+          <div class="stat">
+            <div class="num" id="totalNum">0</div>
+            <div class="muted">إجمالي المهام</div>
+          </div>
+          <div class="stat">
+            <div class="num" id="activeNum">0</div>
+            <div class="muted">المتبقية</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="muted small" style="margin-bottom: 8px">فلتر</div>
+          <div class="filters">
+            <button class="btn filter-btn active" data-filter="all">
+              الكل
+            </button>
+            <button class="btn filter-btn" data-filter="active">
+              غير المكتملة
+            </button>
+            <button class="btn filter-btn" data-filter="completed">
+              المكتملة
+            </button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div>
+          <div class="muted small" style="margin-bottom: 8px">
+            استيراد / تصدير
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center">
+            <input id="fileInput" type="file" accept="application/json" />
+            <div class="muted small">استورد ملف JSON لتحديث المهام أو دمجه</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div>
+          <div class="muted small" style="margin-bottom: 8px">
+            خيارات متقدمة
+          </div>
+          <div style="display: flex; gap: 8px; flex-direction: column">
+            <button class="btn ghost" id="undoBtn">↩ تراجع (غير دائم)</button>
+            <button class="btn ghost" id="redoBtn">↪ إعادة</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div class="muted small">نسخة الاحتياطي آلياً في localStorage</div>
+          <div class="muted small">
+            آخر حفظ: <span id="lastSaved">لا يوجد</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
